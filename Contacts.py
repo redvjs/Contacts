@@ -103,17 +103,34 @@ def get_contact():
 
 # Will need some way to verify the input is appropriate?
 # Will attempt to add this change to the new branch
-def get_contact_details():
-    valid_input = False
-    while (valid_input == False):
+def get_contact_details(choice):
+    match choice:
+        case "all":
+            while True:
+                    name = input("Please enter a name: ").capitalize()
+                    try:
+                        age = int(input("Please enter their age: "))
+                        valid_input = True
+                    except ValueError:
+                        print("You need to enter a numerical value")
+                    gender = input("Please enter a gender: ").capitalize()
+                    occupation = input("Please enter an occupation: ").capitalize()
+                    return name, age, gender, occupation
+        case "name":
             name = input("Please enter a name: ").capitalize()
-            try:
-                age = int(input("Please enter their age: "))
-                valid_input = True
-            except ValueError:
-                print("You need to enter a numerical value")
+        case "age":
+            while (valid_input == False):
+                try:
+                    age = int(input("Please enter their age: "))
+                    valid_input = True
+                except ValueError:
+                    print("You need to enter a numerical value")
+        case "gender":
             gender = input("Please enter a gender: ").capitalize()
+        case "occupation":
             occupation = input("Please enter an occupation: ").capitalize()
+
+
 
 def edit_contact():
     print("\nWhich contact would you like to edit?\n")
@@ -123,6 +140,7 @@ def edit_contact():
         try:
             print("--- Menu Choices ---")
             print("1 : Change All\n2 : Change Name\n3 : Change Age\n4 : Change Gender\n5 : Change Occupation\n")
+            print("-----------------")
             menu_selection = int(input("\nPlease select an option: "))
             if menu_selection in range(1,5):
                 break
@@ -132,10 +150,15 @@ def edit_contact():
             print("Invalid menu selection.")
     if menu_selection == 1:
         print("--- Editing all ---")
+        get_contact_details("all")
+
+edit_contact()
         
     
 
 def main():
     print("--- Contacts Menu ---")
 
-edit_contact()
+if __name__ == "__main__":
+    main()
+
