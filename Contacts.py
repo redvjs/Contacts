@@ -101,6 +101,8 @@ def get_contact():
             print("The Person ID number you entered was incorrect.")
     return person_id
 
+# Will need some way to verify the input is appropriate?
+# Will attempt to add this change to the new branch
 def get_contact_details():
     valid_input = False
     while (valid_input == False):
