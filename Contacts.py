@@ -1,4 +1,4 @@
-persons = {
+contacts = {
     1: {
         "Name": "John",
         "Age" : "37",
@@ -17,10 +17,10 @@ persons = {
     }
 }
         
-def add_contact(person_id="Numeric ID"):
+def add_contact():
      valid_input = False
      while True:
-        print(f"Adding another person as: person {len(persons)+1}")
+        print(f"Adding another person as: person {len(contacts)+1}")
         while (valid_input == False):
             name = input("Please enter a name: ").capitalize()
             try:
@@ -31,7 +31,7 @@ def add_contact(person_id="Numeric ID"):
         gender = input("Please enter a gender: ").capitalize()
         occupation = input("Please enter an occupation: ").capitalize()
         if (valid_input == True):
-            persons[(len(persons)+ 1)] = {"Name" : name, "Age" : age, "Gender" : gender, "Occupation" : occupation}
+            contacts[(len(contacts)+ 1)] = {"Name" : name, "Age" : age, "Gender" : gender, "Occupation" : occupation}
             return
        
 
@@ -40,20 +40,20 @@ def del_contact(person_id=None):
         person_to_delete = get_contact()
         delete_check = input(f"Are you sure you want to delete:\n\n Person ID = {person_id}, Name: {person_to_delete}?\n\n           Y/N: ").upper()
         if delete_check == "Y":
-            del persons[person_id]
+            del contacts[person_id]
 
 
 def display_contacts():
-    for person_id, info in persons.items():
+    for person_id, info in contacts.items():
         print("\nPerson:", person_id)
         for field in info:
             print(f"{field}: {info[field]}") 
 
 def display_contact(person_id=None):
     if person_id is None:
-        contact = persons[get_contact()]
+        contact = contacts[get_contact()]
     else:
-        contact = persons[person_id]
+        contact = contacts[person_id]
     print(f"\n--- Contact {person_id} ---\n")
     print(f"Name: {contact["Name"]}\nAge: {contact["Age"]}\nGender: {contact["Gender"]}\nOccupation: {contact["Occupation"]}" )
     print("\n-----------------")
@@ -76,7 +76,7 @@ def perform_another_action(add=None):
         while True:
             try:
                 if add is not None:
-                    if person_id not in persons:
+                    if person_id not in contacts:
                         break
                     else:
                         print("That Person ID number is already taken.")
@@ -93,7 +93,7 @@ def get_contact():
     while True:
         try:
             person_id = int(input("Please select a contact using their Person ID number"))
-            if person_id in persons:
+            if person_id in contacts:
                 break
             else:
                 print("That was not a valid Person ID number.")
